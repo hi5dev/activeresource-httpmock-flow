@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'activeresource/http_mock/flow'
+require 'irb'
+
+IRB.start
