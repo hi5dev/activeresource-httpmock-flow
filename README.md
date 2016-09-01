@@ -51,10 +51,14 @@ call to `Charge.first` will respond with.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Update your Gemfile to the following:
 
 ```ruby
-gem 'activeresource-httpmock-flow'
+gem 'activeresource'
+
+group :test do
+  gem 'activeresource-httpmock-flow'
+end
 ```
 
 And then execute:
