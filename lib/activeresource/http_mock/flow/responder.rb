@@ -37,7 +37,7 @@ module ActiveResource
       end
 
       def delete_duplicate_responses(request, block)
-        @responses.delete_if {|r| r[0] == request || r[2] == block }
+        @responses.delete_if {|r| r[0] == request }
       end
     end
   end
