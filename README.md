@@ -11,7 +11,7 @@ class Charge < ActiveResource::Base; end
 def charge_customer
   count = Charge.all.count
 
-  Charge.create
+  Charge.create(amount: 10.00)
 
   fail 'could not charge customer' unless Charge.all.count == count + 1
 end
@@ -20,23 +20,50 @@ end
 ActiveResource::HttpMock::Flow can test the above like so:
 
 ```ruby
-@charges = []
+def setup
+  @charges = []
 
-ActiveResource::HttpMock.respond_to do |mock|
-  mock.get '/charges.json' do |request, response|
-    response.body = {charges: @charges}.to_json
-  end
+  ActiveResource::HttpMock.respond_to do |mock|
+    mock.get '/charges.json' do |request, response|
+      response.body = {charges: @charges}.to_json
+    end
 
-  mock.post '/charges.json' do |request, response|
-    @charges << [{id: @charges.length + 1}]
+    mock.post '/charges.json' do |request, response|
+      @charges << [{id: @charges.length + 1}]
+    end
   end
 end
 
-assert_equal 0, Charge.all.count
+def test_customers_are_charged
+  assert_equal 0, Charge.all.count
 
-charge_customer
+  charge_customer
 
-assert_equal 1, Charge.all.count
+  assert_equal 1, Charge.all.count
+end
+```
+
+It also allows you to check if a request was actually made, and to inspect it:
+
+```ruby
+def setup
+  ActiveResource::HttpMock.respond_to do |mock|
+    mock.post '/charges.json' do |request, _|
+      @request = request
+    end
+  end
+end
+
+def test_customers_are_charged
+  charge_customer
+
+  refute_nil @request
+
+  json = ActiveSupport::JSON.decode(@request.body)
+  charge = json['charge']
+
+  assert_equal 10.00, charge['amount']
+end
 ```
 
 ## Installation
