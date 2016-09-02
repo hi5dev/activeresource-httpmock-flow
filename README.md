@@ -44,8 +44,6 @@ assert_equal 1, Charge.all.count
 Update your Gemfile to the following:
 
 ```ruby
-gem 'activeresource'
-
 group :test do
   gem 'activeresource-httpmock-flow'
 end
@@ -54,6 +52,17 @@ end
 And then execute:
 
     $ bundle
+
+## Usage
+
+Require the library in your test helper:
+
+```ruby
+require 'activeresource/http_mock/flow'
+```
+
+And use ActiveResource::HttpMock as you would normally. It is compatible with
+the default implementation as well.
 
 ## Development
 
