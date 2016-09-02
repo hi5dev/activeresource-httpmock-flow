@@ -1,11 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'activeresource/http_mock/flow/version'
 
 Gem::Specification.new do |spec|
   spec.name = 'activeresource-httpmock-flow'
-  spec.version = ActiveResource::HttpMock::Flow::VERSION
+  spec.version = '0.1.0'
   spec.authors = ['Travis Haynes']
   spec.email = ['travis@hi5dev.com']
 
@@ -21,8 +20,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'activeresource'
 
   spec.add_development_dependency 'activesupport'
-  spec.add_development_dependency 'bundler', '~> 1.12.5'
-  spec.add_development_dependency 'byebug', '~> 9.0.5'
-  spec.add_development_dependency 'minitest', '~> 5.1'
-  spec.add_development_dependency 'rake', '~> 11.2.2'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'byebug'
+  spec.add_development_dependency 'minitest'
+  spec.add_development_dependency 'rake'
 end
