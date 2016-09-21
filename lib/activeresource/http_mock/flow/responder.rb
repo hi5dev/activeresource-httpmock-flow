@@ -5,7 +5,7 @@ module ActiveResource
         @responses = responses
       end
 
-      [:delete, :get, :head, :patch, :post].each do |http_verb|
+      [:delete, :get, :head, :patch, :post, :put].each do |http_verb|
         define_method(http_verb) do |path, *args, &block|
           mock(http_verb, path, options_from_args(*args), &block)
         end
